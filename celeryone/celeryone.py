@@ -99,8 +99,6 @@ class QueueOne(Task):
             options['task_id'] = task_id
         celery_uno_data = {'task_id': task_id, 'expires': timeout}
 
-        print(key)
-        print(task_id)
         try:
             self.raise_or_lock(key, celery_uno_data)
         except self.AlreadyQueued as e:
