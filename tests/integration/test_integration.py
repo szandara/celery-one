@@ -138,9 +138,9 @@ def test_apply_async_4(redis):
 
 def test_redis():
     assert example.redis.connection_pool.connection_kwargs['host'] == "localhost"
-    assert example.redis.connection_pool.connection_kwargs['port'] == 1337
+    assert example.redis.connection_pool.connection_kwargs['port'] == 6379
     assert example.redis.connection_pool.connection_kwargs['db'] == 0
 
 
 def test_default_timeout():
-    assert example.default_timeout == 30 * 60
+    assert example.default_timeout == 60 * 60

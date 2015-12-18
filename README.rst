@@ -1,7 +1,7 @@
 Celery One
 ===========
 
-|Build Status| |Coverage Status|
+|Build Status|
 
 Celery One allows you to prevent multiple execution and queuing of `celery <http://www.celeryproject.org/>`_ tasks.
 The project is a fork of `celery-once https://github.com/TrackMaven/celery-once` to which I give all credits
