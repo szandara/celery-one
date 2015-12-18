@@ -4,22 +4,22 @@ Celery One
 |Build Status|
 
 Celery One allows you to prevent multiple execution and queuing of `celery <http://www.celeryproject.org/>`_ tasks.
-The project is a fork of `celery-once https://github.com/TrackMaven/celery-once` to which I give all credits
-for the initial architecture. The package was created to add more functionality to the latter.
-``celery_one`` is not directly compatible with ``celery_once`` but it's easy to obtain the same behavior.
+The project is a fork of `celery-once <https://github.com/TrackMaven/celery-once>`_ to which I give all credits
+for the initial architecture and part of this README :). The project was created to add more functionality to the original version.
+``celery_one`` is compatible with ``celery_once``'s previous behaviour if properly configured.
 
 The main differences are the following:
 
 * Option to prevent tasks with same id
 * Option to get an AsyncResult if the task is already queue
 * Compatibility with chords and groups
-* Infinite timeout
+* Optional infinite timeout
 * Redis connection pool
 
 Installation
 ============
 
-Installing ``celery_one`` with pip, just run:
+To install ``celery_one`` with pip just run:
 
 ::
 
@@ -108,7 +108,7 @@ with meaningful task ids or when the arguments are not necessarily indication of
 ``fail``
 ------------
 
-Optionally, instead of raising an ``AlreadyQueued`` exception, the task can return an `AsyncResult <http://docs.celeryproject.org/en/latest/reference/celery.result.html>`.
+Optionally, instead of raising an ``AlreadyQueued`` exception, the task can return an `AsyncResult <http://docs.celeryproject.org/en/latest/reference/celery.result.html>`_.
 To do so, set the option in the celery task or directly in the ``apply_async`` call.
 
 .. code:: python
