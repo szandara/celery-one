@@ -74,8 +74,11 @@ The key of the task is generated from its name and parameters.
 
 .. code:: python
 
-    result = example.apply_async(args=(10))
-    result = example.apply_async(args=(10))
+    result1 = example.apply_async(args=(10,))
+    result2 = example.apply_async(args=(10,), one_options={'fail':False}) # No failure here
+    assert result1.id == result2.id
+
+    result = example.apply_async(args=(10,))
     Traceback (most recent call last):
         ..
     AlreadyQueued()
