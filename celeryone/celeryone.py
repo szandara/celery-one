@@ -82,14 +82,12 @@ class QueueOne(Task):
             task_id = str(task_id)
 
         # Is this task part of a group?
-        is_in_group = 'group_id' in options
+        is_in_chord = 'chord' in options
 
         one_options = options.get('one_options', {})
-
         use_id = one_options.get('use_id', self.one_options.get('use_id', False))
         must_fail = one_options.get('fail', self.one_options.get('fail', True))
         timeout = one_options.get('timeout', self.one_options.get('expires', self.default_timeout))
-
         key = self.get_key(one_options, task_id, args, kwargs)
 
         if not use_id and not task_id:
@@ -103,7 +101,7 @@ class QueueOne(Task):
             self.raise_or_lock(key, celery_uno_data)
         except self.AlreadyQueued as e:
             if not must_fail:
-                if is_in_group:
+                if is_in_chord:
                     return no_op.apply_async(**options)
                 else:
                     return AsyncResult(e.task_id)
@@ -119,7 +117,6 @@ class QueueOne(Task):
         return 'qoid_' + base64.b64encode((self.name + key).encode('utf-8')).decode()
 
     def get_key(self, one_options, task_id, args, kwargs):
-
         use_id = one_options.get('use_id', self.one_options.get('use_id', False))
         # The user can specify whether he wants to use the task id or the parameters
         if use_id:
@@ -166,8 +163,7 @@ class QueueOne(Task):
         the task.
         """
         now = now_unix()
-        # Check if the tasks is already queued if key is in redis.
-
+        # Check if the task is already queued.
         running_task = self.redis.hgetall(key)
 
         if bool(running_task):
@@ -179,7 +175,6 @@ class QueueOne(Task):
                 remaining = int(running_expire_time) - now
                 if remaining > 0:
                     raise self.AlreadyQueued(running_task_id, remaining)
-
             elif running_task_id:
                 raise self.AlreadyQueued(running_task_id, None)
 

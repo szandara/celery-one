@@ -6,8 +6,8 @@ import pytest
 
 
 app = Celery()
-app.conf.ONCE_REDIS_URL = 'redis://localhost:1337/0'
-app.conf.ONCE_DEFAULT_TIMEOUT = 30 * 60
+app.conf.ONE_REDIS_URL = 'redis://localhost:1337/0'
+app.conf.ONE_DEFAULT_TIMEOUT = 30 * 60
 app.conf.CELERY_ALWAYS_EAGER = True
 
 
