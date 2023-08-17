@@ -1,4 +1,4 @@
-Celery One
+Celery One [DEPRECATED]
 ===========
 
 |Build Status|
